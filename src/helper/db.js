@@ -1,11 +1,13 @@
 import mongoose from "mongoose";
 
-async function dbconnect(){
+export async function dbconnect(){
     try{
         await mongoose.connect(process.env.MONGO_URI,{
             dbName: "WorkingStatusDB",
             useUnifiedTopology: true
         })
+
+        console.log("Database connected")
     }catch(error){
 
     }

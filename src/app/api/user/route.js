@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
+import { dbconnect } from "@/helper/db";
 
+dbconnect();
 export function GET(request){
     const users = [
         {
