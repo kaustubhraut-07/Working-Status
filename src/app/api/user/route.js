@@ -26,7 +26,7 @@ export function GET(request){
 
 export async function POST(request){
     try{
-    const {name, email, password} =  request.json();
+    const {name, email, password} = await request.json();
     const user = new User({
         name  : name,
         email : email,
@@ -37,5 +37,4 @@ export async function POST(request){
 }catch(error){
    return NextResponse.json({message : error.message});
 }
-
 };
