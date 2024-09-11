@@ -9,6 +9,6 @@ export async function dbconnect(){
 
         console.log("Database connected")
     }catch(error){
-
+        console.log("Database not connected", error.message);
     }
 }

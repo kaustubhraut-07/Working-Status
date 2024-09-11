@@ -9,10 +9,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    passord: {
+    password: {
         type: String,
         required: true
     }
 });
 
-export const User = mongoose.model.User || mongoose.model("User", userSchema)
+export const User = mongoose.models.User || mongoose.model("User", userSchema)
