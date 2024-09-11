@@ -2,25 +2,18 @@ import { NextResponse } from "next/server";
 import { dbconnect } from "@/helper/db";
 import { User } from "@/models/user";
 dbconnect();
-export function GET(request){
-    const users = [
-        {
-            id: 1,
-            name: "Kaustubh"
+export async function GET(request){
+    
+    try{
 
-        },
-        {
-            id: 2,
-            name: "ankit"
+        
+      const  users = await User.find();
+        return NextResponse.json({message : users});
+    }catch(error){
 
-        },
-        {
-            id: 3,
-            name: "yogesh"
+        return NextResponse.json({message : error.message});
 
-        },
-    ];
-    return NextResponse.json(users);
+    }
 
 };
 
