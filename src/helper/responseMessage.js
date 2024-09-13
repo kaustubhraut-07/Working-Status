@@ -10,4 +10,4 @@ export const getResponseMessage = (messageText, statusCode, successStatus) => {
       status: statusCode,
     }
   );
-};
+};     
