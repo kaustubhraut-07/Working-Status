@@ -31,6 +31,7 @@ const Signup = () => {
     /////
     // form submit
     try {
+        console.log(data);
       const result = await signUp(data);
 
       console.log(result);
