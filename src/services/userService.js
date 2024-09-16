@@ -1,6 +1,7 @@
 import { httpAxios } from "@/helper/httpHelper";
 
 export async function signUp(user) {
+  console.log(user , "from frontend to api data");
   const result = await httpAxios
     .post("/api/user", user)
     .then((response) => response.data);
