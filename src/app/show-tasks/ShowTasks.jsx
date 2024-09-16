@@ -8,9 +8,11 @@ import { toast } from "react-toastify";
 const ShowTasks = () => {
   const [tasks, setTasks] = useState([]);
   const context = useContext(UserContext);
+  console.log(context , "context");
   async function loadTasks(userId) {
     try {
       const tasks = await getTasksOfUser(userId);
+      console.log(tasks , "tasks");
       setTasks([...tasks].reverse());
       console.log(tasks);
     } catch (error) {
