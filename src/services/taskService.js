@@ -7,9 +7,9 @@ export async function addTask(task) {
   return result;
 }
 
-export async function getTasksOfUser(userId) {
+export async function getTasksOfUser(userid) {
   const result = await httpAxios
-    .get(`/api/users/${userId}/tasks`)
+    .get(`/api/user/${userid}/tasks`)
     .then((response) => response.data);
   return result;
 }
