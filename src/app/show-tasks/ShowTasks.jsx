@@ -7,30 +7,32 @@ import { toast } from "react-toastify";
 
 const ShowTasks = () => {
   const [tasks, setTasks] = useState([]);
-  const context = useContext(UserContext);
-  console.log(context , "context");
+  // const context = useContext(UserContext);
+  // console.log(context , "context");
+  const userId = localStorage.getItem("userId");
+  console.log(userId);
   async function loadTasks(userId) {
     try {
-      const tasks = await getTasksOfUser(userId);
-      console.log(tasks , "tasks");
-      setTasks([...tasks].reverse());
-      console.log(tasks);
+      const taskss = await getTasksOfUser(userId);
+      console.log(taskss , "tasks");
+      setTasks(...taskss.message.reverse());
+      console.log(taskss);
     } catch (error) {
       console.log(error);
     }
   }
 
   useEffect(() => {
-    if (context.user) {
-      loadTasks(context.user._id);
+    if (userId) {
+      loadTasks(userId);
     }
-  }, [context.user]);
+  }, [userId]);
 
   async function deleteTaskParent(tasksId) {
     try {
       const result = await deleteTask(tasksId);
       console.log(result);
-      const newTasks = tasks.filter((item) => item._id != tasksId);
+      const newTasks = tasks?.message.filter((item) => item._id != tasksId);
       setTasks(newTasks);
       toast.success("Your task is deleted ");
     } catch (error) {
@@ -42,9 +44,9 @@ const ShowTasks = () => {
   return (
     <div className="grid grid-cols-12 mt-3">
       <div className="col-span-6 col-start-4">
-        <h1 className="text-3xl mb-3 ">Your tasks ( {tasks.length} )</h1>
+        <h1 className="text-3xl mb-3 ">Your tasks ( {tasks?.message?.length} )</h1>
 
-        {tasks.map((task) => (
+        {tasks?.message?.map((task) => (
           <Task
             task={task}
             key={task._id}

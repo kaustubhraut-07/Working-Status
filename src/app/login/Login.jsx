@@ -29,6 +29,7 @@ const Login = () => {
     try {
       const result = await login(loginData);
       console.log(result);
+      localStorage.setItem('userId' , result.user._id);
       toast.success("Logged In");
       //redirect
       context.setUser(result.user);

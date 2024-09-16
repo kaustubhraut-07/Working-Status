@@ -1,24 +1,37 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import loginSvg from "../../assets/login.svg";
 import Image from "next/image";
 import { addTask } from "@/services/taskService";
-import { taost, toast } from "react-toastify";
+import { toast } from "react-toastify";
+import UserContext from "@/context/userContext";
 
 const AddTask = () => {
-  // console.log("this is add task component");
-
+  console.log("this is add task component");
+  const context = useContext(UserContext);
+  console.log(context, "context in addtasks");
+const userId = localStorage.getItem('userId');
   const [task, setTask] = useState({
     title: "",
     content: "",
     status: "none",
-    // temp solution
-    userId: "64a506ab413f1d5bcafcdbec",
+    userId: "",
   });
+
+  // useEffect(() => {
+  //   console.log(context, "context in addtasks");
+  //   if (context && context.user && context.user._id) {
+  //     setTask((prevTask) => ({
+  //       ...prevTask,
+  //       userId: context.user._id,
+  //     }));
+  //   }
+  // }, [context]);
 
   const handleAddTask = async (event) => {
     event.preventDefault();
     console.log(task);
+    // console.log(context, "context.user._id");
     // validate task data
     try {
       const result = await addTask(task);
@@ -31,6 +44,7 @@ const AddTask = () => {
         title: "",
         content: "",
         status: "none",
+        userId: userId, // Keep userId in the reset state
       });
     } catch (error) {
       console.log(error);
@@ -41,8 +55,8 @@ const AddTask = () => {
   };
 
   return (
-    <div className="grid grid-cols-12  justify-center">
-      <div className="col-span-4 col-start-5 p-5  shadow-sm">
+    <div className="grid grid-cols-12 justify-center">
+      <div className="col-span-4 col-start-5 p-5 shadow-sm">
         <div className="my-8 flex justify-center">
           <Image
             src={loginSvg}
@@ -133,7 +147,18 @@ const AddTask = () => {
             <button className="bg-blue-600 py-2 px-3 rounded-lg hover:bg-blue-800">
               Add Task{" "}
             </button>
-            <button className="bg-red-600 py-2 px-3 rounded-lg hover:bg-red-800 ms-3">
+            <button
+              type="button"
+              className="bg-red-600 py-2 px-3 rounded-lg hover:bg-red-800 ms-3"
+              onClick={() => {
+                setTask({
+                  title: "",
+                  content: "",
+                  status: "none",
+                  userId: userId, // Keep userId in the reset state
+                });
+              }}
+            >
               Clear
             </button>
           </div>
