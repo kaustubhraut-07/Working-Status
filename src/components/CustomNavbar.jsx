@@ -15,6 +15,10 @@ const CustomNavbar = () => {
     try {
       const result = await logout();
       console.log(result);
+      localStorage.clear();
+      toast.success("Logout Success",{
+        position: "top-center",
+      });
       context.setUser(undefined);
       router.push("/");
     } catch (error) {

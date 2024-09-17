@@ -15,7 +15,7 @@ const ShowTasks = () => {
     try {
       const taskss = await getTasksOfUser(userId);
       console.log(taskss , "tasks");
-      setTasks(...taskss.message.reverse());
+      setTasks(taskss.message);
       console.log(taskss);
     } catch (error) {
       console.log(error);
